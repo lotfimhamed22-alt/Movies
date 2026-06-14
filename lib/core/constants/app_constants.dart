@@ -12,4 +12,14 @@ class AppConstants {
 
   static const String authSuscess = "Password created successfully!";
   static const String authFailure = "Fassword Or Email is Invalid";
+
+  static const String homeBottomNavigationBar = "Home";
+  static const String search = "Search";
+  static const String watchListBottomNavigationBar = "Watch List";
+  static const String homeTitle = "What do you want to watch?";
+
+  static const String nowPlaying = "Now playing";
+  static const String popular = "Popular";
+  static const String topRated = "Top rated";
+  static const String upComing = "Upcoming";
 }

@@ -4,4 +4,5 @@ class RoutesConstants {
   static const String forgetPasswordPath = "/forgetpass";
   static const String splash = "/splash";
   static const String homePath = "/home";
+  static const String bottomNavigationPath = "/bottom";
 }

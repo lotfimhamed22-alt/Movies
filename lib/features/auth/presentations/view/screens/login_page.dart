@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                         textColor: AppColors.textPrimary,
                         text: AppConstants.authSuscess,
                       );
-                      context.go(RoutesConstants.homePath);
+                      context.go(RoutesConstants.bottomNavigationPath);
                     }
                     if (state is SigninFailure) {
                       Snack.snack(

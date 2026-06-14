@@ -18,7 +18,7 @@ class Forgetpass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
+    //  TextEditingController _passwordController = TextEditingController();
     final _formKey = GlobalKey<FormState>();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),

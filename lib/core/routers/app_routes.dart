@@ -9,10 +9,11 @@ import 'package:movies/features/auth/presentations/view_model/signin/cubit/signi
 import 'package:movies/features/auth/presentations/view_model/signup/signup_cubit.dart';
 import 'package:movies/features/home/presentation/view/screens/home_page.dart';
 import 'package:movies/features/splash/splash_logic.dart';
+import 'package:movies/main_layout_screen.dart';
 
 class AppRoutes {
   static final router = GoRouter(
-    initialLocation: RoutesConstants.splash,
+    initialLocation: RoutesConstants.bottomNavigationPath,
     routes: [
       GoRoute(
         path: RoutesConstants.splash,
@@ -42,6 +43,10 @@ class AppRoutes {
       GoRoute(
         path: RoutesConstants.homePath,
         builder: (context, state) => HomePage(),
+      ),
+      GoRoute(
+        path: RoutesConstants.bottomNavigationPath,
+        builder: (context, state) => MainLayoutScreen(),
       ),
     ],
   );
