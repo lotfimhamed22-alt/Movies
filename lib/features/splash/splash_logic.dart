@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/features/splash/splash_ui.dart';
 
 class SplashLogic extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SplashLogicState extends State<SplashLogic> {
   Future<void> navigateToSplash() async {
     await Future.delayed(Duration(seconds: 5));
     if (!mounted) return;
-    context.push("/login");
+    context.push(RoutesConstants.loginPath);
   }
 
   @override

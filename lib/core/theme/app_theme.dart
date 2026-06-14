@@ -32,8 +32,9 @@ class AppTheme {
 
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(),
+
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(25),
         borderSide: BorderSide(color: AppColors.success),
       ),
     ),
