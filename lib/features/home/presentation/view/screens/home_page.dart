@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -52,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.w500,
               ),
               Gap(20.h),
-              CustomTextfield(),
+              CustomTextfield(readOnly: true),
               Gap(30.h),
               CustomCarousel(),
               Gap(50.h),

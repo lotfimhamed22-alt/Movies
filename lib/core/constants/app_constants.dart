@@ -22,4 +22,8 @@ class AppConstants {
   static const String popular = "Popular";
   static const String topRated = "Top rated";
   static const String upComing = "Upcoming";
+
+  static const String noMovies = "we are sorry, we can\nnot find the movie :(";
+  static const String searchNow =
+      "Find your movie by Type title,\n\t\t\t\t\t categories, years, etc ";
 }

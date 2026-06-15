@@ -7,6 +7,8 @@ import 'package:movies/features/home/presentation/view_model/now_playing/now_pla
 import 'package:movies/features/home/presentation/view_model/popular/popular_cubit.dart';
 import 'package:movies/features/home/presentation/view_model/top_rated/top_rated_cubit.dart';
 import 'package:movies/features/home/presentation/view_model/up_coming/up_coming_cubit.dart';
+import 'package:movies/features/search/presentation/model_view/search/search_cubit.dart';
+import 'package:movies/features/search/presentation/view/screens/search_page.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
@@ -27,7 +29,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       ],
       child: HomePage(),
     ),
-    Container(),
+    BlocProvider(create: (context) => SearchCubit(), child: SearchPage()),
     Container(),
   ];
   @override
