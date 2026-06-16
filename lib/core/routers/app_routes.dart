@@ -7,6 +7,10 @@ import 'package:movies/features/auth/presentations/view/screens/signup_page.dart
 import 'package:movies/features/auth/presentations/view_model/forgetpass/cubit/forget_pass_cubit.dart';
 import 'package:movies/features/auth/presentations/view_model/signin/cubit/signin_cubit.dart';
 import 'package:movies/features/auth/presentations/view_model/signup/signup_cubit.dart';
+import 'package:movies/features/details/presentation/view/screens/details_screen.dart';
+import 'package:movies/features/details/presentation/view_model/cast/cubit/cast_cubit.dart';
+import 'package:movies/features/details/presentation/view_model/review/cubit/review_cubit.dart';
+import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/home/presentation/view/screens/home_page.dart';
 import 'package:movies/features/splash/splash_logic.dart';
 import 'package:movies/main_layout_screen.dart';
@@ -47,6 +51,20 @@ class AppRoutes {
       GoRoute(
         path: RoutesConstants.bottomNavigationPath,
         builder: (context, state) => MainLayoutScreen(),
+      ),
+      GoRoute(
+        path: RoutesConstants.detailsPath,
+
+        builder: (context, state) {
+          final movie = state.extra as MovieModel;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => ReviewCubit()),
+              BlocProvider(create: (context) => CastCubit()),
+            ],
+            child: DetailsScreen(data: movie),
+          );
+        },
       ),
     ],
   );

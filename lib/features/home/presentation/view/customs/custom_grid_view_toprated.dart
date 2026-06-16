@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movies/core/constants/routes_constants.dart';
+import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/responsive/extentions.dart';
 import 'package:movies/features/home/presentation/view_model/top_rated/top_rated_cubit.dart';
 
@@ -23,13 +26,14 @@ class CustomGridViewTopRated extends StatelessWidget {
               childAspectRatio: 1 / 1.6,
             ),
             itemBuilder: (context, index) {
-              return ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(30.r),
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/w500${state.responseModel.results[index].posterPath}',
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      Icon(Icons.error),
+              return GestureDetector(
+                onTap: () => context.push(
+                  RoutesConstants.detailsPath,
+                  extra: state.responseModel.results[index],
+                ),
+                child: CustomClipRrect(
+                  imgPath:
+                      'https://image.tmdb.org/t/p/w500${state.responseModel.results[index].posterPath}',
                 ),
               );
             },

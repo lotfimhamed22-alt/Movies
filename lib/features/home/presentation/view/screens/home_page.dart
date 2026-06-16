@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
               CustomTextfield(readOnly: true),
               Gap(30.h),
               CustomCarousel(),
-              Gap(50.h),
+              Gap(20.h),
               TabBar(
                 labelColor: AppColors.textPrimary,
                 unselectedLabelColor: AppColors.myBlue,

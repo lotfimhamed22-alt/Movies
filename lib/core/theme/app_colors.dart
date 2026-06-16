@@ -11,4 +11,6 @@ class AppColors {
   static const Color error = Colors.red;
   static const Color success = Colors.green;
   static const Color warning = Colors.orange;
+
+  static const Color circleColor = Color(0xff25283652);
 }

@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movies/core/constants/routes_constants.dart';
+import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/responsive/extentions.dart';
 import 'package:movies/core/theme/app_colors.dart';
@@ -29,12 +32,14 @@ class CustomCarousel extends StatelessWidget {
               autoPlayAnimationDuration: Duration(seconds: 2),
             ),
             itemBuilder: (context, index, realIndex) {
-              return ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(30.r),
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/w500${state.response.results[index].posterPath}',
-                  errorBuilder: (context, error, stackTrace) =>
-                      Icon(Icons.error),
+              return GestureDetector(
+                onTap: () => context.push(
+                  RoutesConstants.detailsPath,
+                  extra: state.response.results[index],
+                ),
+                child: CustomClipRrect(
+                  imgPath:
+                      'https://image.tmdb.org/t/p/w500${state.response.results[index].posterPath}',
                 ),
               );
             },

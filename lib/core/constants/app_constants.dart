@@ -26,4 +26,12 @@ class AppConstants {
   static const String noMovies = "we are sorry, we can\nnot find the movie :(";
   static const String searchNow =
       "Find your movie by Type title,\n\t\t\t\t\t categories, years, etc ";
+
+  static const String aboutMovie = "About Movie";
+  static const String reviews = "Reviews";
+  static const String cast = "Cast";
+
+  static const String details = "Detail";
+  static const String enterMovieName =
+      "Search for the movie\n\t\t\t\t\t\t\tyou want !";
 }

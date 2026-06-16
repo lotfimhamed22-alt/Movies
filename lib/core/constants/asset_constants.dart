@@ -4,4 +4,6 @@ class AssetConstants {
   static const String signupAsset = "assets/images/lock.png";
   static const String forgetAsset = "assets/images/forgetAsset.png";
   static const String searchAsset = "assets/images/search.png";
+  static const String personAsset = "assets/images/person.png";
+  static const String gifAsset = "assets/gif/finding.gif";
 }

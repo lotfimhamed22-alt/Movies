@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/app_constants.dart';
 import 'package:movies/core/constants/asset_constants.dart';
+import 'package:movies/core/constants/routes_constants.dart';
+import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/customs/custom_textfield.dart';
@@ -23,11 +26,12 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(text: AppConstants.search),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
-            Gap(115.h),
+            Gap(2.h),
             CustomTextfield(
               onChanged: (value) {
                 if (value.trim().isNotEmpty) {
@@ -45,21 +49,16 @@ class _SearchPageState extends State<SearchPage> {
                 if (_searchController.text.isEmpty) {
                   return Column(
                     children: [
-                      Gap(230.h),
-                      Image.asset(AssetConstants.searchAsset, width: 70.w),
-                      Gap(30.h),
-                      CustomText(
-                        text: AppConstants.noMovies,
-                        color: AppColors.textPrimary,
-                        fontSize: 25.sp,
-                        fontWeight: FontWeight.w700,
+                      Gap(155.h),
+                      Image.asset(
+                        AssetConstants.gifAsset,
+                        width: 260.w,
+                        fit: BoxFit.cover,
                       ),
-                      Gap(10.h),
                       CustomText(
-                        text: AppConstants.searchNow,
-                        color: AppColors.textSecondary,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
+                        text: AppConstants.enterMovieName,
+                        color: Colors.white,
+                        fontSize: 18,
                       ),
                     ],
                   );
@@ -75,7 +74,26 @@ class _SearchPageState extends State<SearchPage> {
 
                 if (state is SearchSuccess) {
                   if (state.responseModel.results.isEmpty) {
-                    return CustomText(text: "nodata");
+                    return Column(
+                      children: [
+                        Gap(230.h),
+                        Image.asset(AssetConstants.searchAsset, width: 70.w),
+                        Gap(30.h),
+                        CustomText(
+                          text: AppConstants.noMovies,
+                          color: AppColors.textPrimary,
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        Gap(10.h),
+                        CustomText(
+                          text: AppConstants.searchNow,
+                          color: AppColors.textSecondary,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ],
+                    );
                   }
                   return SizedBox(
                     height: 733.h,
@@ -91,9 +109,15 @@ class _SearchPageState extends State<SearchPage> {
                               SizedBox(
                                 height: 160.h,
                                 width: 125.w,
-                                child: CustomClipRrect(
-                                  imgPath:
-                                      'https://image.tmdb.org/t/p/w500${state.responseModel.results[index].posterPath}',
+                                child: GestureDetector(
+                                  onTap: () => context.push(
+                                    RoutesConstants.detailsPath,
+                                    extra: state.responseModel.results[index],
+                                  ),
+                                  child: CustomClipRrect(
+                                    imgPath:
+                                        'https://image.tmdb.org/t/p/w500${state.responseModel.results[index].posterPath}',
+                                  ),
                                 ),
                               ),
                               Padding(
