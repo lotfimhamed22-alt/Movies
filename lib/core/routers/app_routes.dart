@@ -7,6 +7,8 @@ import 'package:movies/features/auth/presentations/view/screens/signup_page.dart
 import 'package:movies/features/auth/presentations/view_model/forgetpass/cubit/forget_pass_cubit.dart';
 import 'package:movies/features/auth/presentations/view_model/signin/cubit/signin_cubit.dart';
 import 'package:movies/features/auth/presentations/view_model/signup/signup_cubit.dart';
+import 'package:movies/features/details/data/repos/cast_repo.dart';
+import 'package:movies/features/details/data/repos/reviews_repo.dart';
 import 'package:movies/features/details/presentation/view/screens/details_screen.dart';
 import 'package:movies/features/details/presentation/view_model/cast/cubit/cast_cubit.dart';
 import 'package:movies/features/details/presentation/view_model/review/cubit/review_cubit.dart';
@@ -54,13 +56,12 @@ class AppRoutes {
       ),
       GoRoute(
         path: RoutesConstants.detailsPath,
-
         builder: (context, state) {
           final movie = state.extra as MovieModel;
           return MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => ReviewCubit()),
-              BlocProvider(create: (context) => CastCubit()),
+              BlocProvider(create: (context) => ReviewCubit(ReviewsRepo())),
+              BlocProvider(create: (context) => CastCubit(CastRepo())),
             ],
             child: DetailsScreen(data: movie),
           );

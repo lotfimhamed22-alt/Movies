@@ -41,12 +41,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
         child: Column(
           children: [
             SizedBox(
-              height: 440.h,
+              height: 400.h,
               width: double.infinity,
               child: Stack(
                 children: [
                   CustomClipRrect(
-                    height: 340.h,
+                    height: 300.h,
                     width: double.infinity,
                     imgPath:
                         'https://image.tmdb.org/t/p/w500${widget.data.posterPath}',
