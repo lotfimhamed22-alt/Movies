@@ -26,7 +26,10 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(text: AppConstants.search),
+      appBar: CustomAppBar(
+        text: AppConstants.search,
+        icon: Icons.error_outline,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
@@ -96,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
                     );
                   }
                   return SizedBox(
-                    height: 733.h,
+                    height: 713.h,
                     width: double.infinity,
                     child: ListView.builder(
                       itemCount: state.responseModel.results.length,

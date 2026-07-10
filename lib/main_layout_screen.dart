@@ -14,6 +14,9 @@ import 'package:movies/features/home/presentation/view_model/up_coming/up_coming
 import 'package:movies/features/search/data/repo/search_repo.dart';
 import 'package:movies/features/search/presentation/model_view/search/search_cubit.dart';
 import 'package:movies/features/search/presentation/view/screens/search_page.dart';
+import 'package:movies/features/watch_list/presentation/view/screen/watch_list_screen.dart';
+import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
+import 'package:movies/features/watch_list/presentation/view_model/get_movie/cubit/get_movie_cubit.dart';
 
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
@@ -38,7 +41,13 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       create: (context) => SearchCubit(SearchRepo()),
       child: SearchPage(),
     ),
-    Container(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => GetMovieCubit()),
+        BlocProvider(create: (context) => DeleteMovieCubit()),
+      ],
+      child: WatchListScreen(),
+    ),
   ];
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,211 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:movies/core/constants/app_constants.dart';
+import 'package:movies/core/constants/asset_constants.dart';
+import 'package:movies/core/customs/custom_app_bar.dart';
+import 'package:movies/core/customs/custom_clip_rrect.dart';
+import 'package:movies/core/customs/custom_text.dart';
+import 'package:movies/core/responsive/extentions.dart';
+import 'package:movies/core/theme/app_colors.dart';
+import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
+import 'package:movies/features/watch_list/data/model/movie_model_watchlist.dart';
+import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
+import 'package:movies/features/watch_list/presentation/view_model/get_movie/cubit/get_movie_cubit.dart';
+
+class WatchListScreen extends StatefulWidget {
+  const WatchListScreen({super.key});
+
+  @override
+  State<WatchListScreen> createState() => _WatchListScreenState();
+}
+
+class _WatchListScreenState extends State<WatchListScreen> {
+  @override
+  void initState() {
+    context.read<GetMovieCubit>().getMoveToWatchList();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(text: AppConstants.watchList),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Gap(20.h),
+            BlocBuilder<GetMovieCubit, GetMovieState>(
+              builder: (context, state) {
+                if (state is GetMovieSuccess) {
+                  if (state.movies.isEmpty) {
+                    return EmptyWatchListWidget();
+                  }
+                  return SizedBox(
+                    height: 750.h,
+                    child: ListView.builder(
+                      itemCount: state.movies.length,
+                      itemBuilder: (context, index) {
+                        List<MovieModelWatchlist> movie = state.movies;
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 12.0,
+                            right: 20,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 160.h,
+                                width: 125.w,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: CustomClipRrect(
+                                    imgPath:
+                                        'https://image.tmdb.org/t/p/w500${state.movies[index].posterPath}',
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12.0,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      text: state.movies[index].title,
+                                      color: AppColors.textPrimary,
+                                      fontSize: 22.sp,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Gap(20.h),
+                                    CustomRowDetailsMovieSearch(
+                                      text: state.movies[index].id.toString(),
+                                      icon: Icons.star_border,
+                                      iconColor: AppColors.warning,
+                                      textColor: AppColors.warning,
+                                    ),
+                                    Gap(5.h),
+                                    CustomRowDetailsMovieSearch(
+                                      text: state.movies[index].releaseDate,
+                                      icon: Icons.bookmark_outline,
+                                      iconColor: AppColors.textSecondary,
+                                      textColor: AppColors.textSecondary,
+                                    ),
+                                    Gap(5.h),
+                                    CustomRowDetailsMovieSearch(
+                                      text: state.movies[index].voteAverage
+                                          .toString(),
+                                      icon: Icons.local_movies,
+                                      iconColor: AppColors.textSecondary,
+                                      textColor: AppColors.textSecondary,
+                                    ),
+                                    Gap(5.h),
+                                    CustomRowDetailsMovieSearch(
+                                      text: state.movies[index].voteCount
+                                          .toString(),
+                                      icon: Icons.calendar_today,
+                                      iconColor: AppColors.textSecondary,
+                                      textColor: AppColors.textSecondary,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Row(children: [_getDeleteMovie(movie, index)]),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
+                return Center(
+                  child: CustomText(
+                    text: AppConstants.noMovieYet,
+                    color: AppColors.textPrimary,
+                    fontSize: 20.sp,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  BlocBuilder<DeleteMovieCubit, DeleteMovieState> _getDeleteMovie(
+    List<MovieModelWatchlist> movie,
+    int index,
+  ) {
+    return BlocBuilder<DeleteMovieCubit, DeleteMovieState>(
+      builder: (context, state) {
+        print("delete");
+        return GestureDetector(
+          onTap: () {
+            _deleteMovieFromWatchList(movie, index, context);
+          },
+          child: Icon(Icons.delete, size: 45.w, color: AppColors.error),
+        );
+      },
+    );
+  }
+
+  void _deleteMovieFromWatchList(
+    List<MovieModelWatchlist> movie,
+    int index,
+    BuildContext context,
+  ) {
+    print(movie[index].id);
+    context.read<DeleteMovieCubit>().removeMovie(
+      MovieModelWatchlist(
+        id: movie[index].id,
+        title: movie[index].title,
+        overview: movie[index].overview,
+        posterPath: movie[index].posterPath,
+        backdropPath: movie[index].backdropPath,
+        releaseDate: movie[index].releaseDate,
+        voteAverage: movie[index].voteAverage,
+        voteCount: movie[index].voteCount,
+        popularity: movie[index].popularity,
+        genreIds: movie[index].genreIds,
+      ),
+    );
+    context.read<GetMovieCubit>().getMoveToWatchList();
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: CustomText(text: "Movie is Deleteted")));
+  }
+}
+
+class EmptyWatchListWidget extends StatelessWidget {
+  const EmptyWatchListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Image.asset(AssetConstants.emptyBox, width: 120.w),
+          Gap(20.h),
+          CustomText(
+            text: AppConstants.noMovieYet,
+            color: AppColors.textPrimary,
+            fontSize: 20.sp,
+          ),
+          Gap(20.h),
+          CustomText(
+            text: AppConstants.findYourMovie,
+            color: AppColors.textSecondary,
+            fontSize: 16.sp,
+          ),
+        ],
+      ),
+    );
+  }
+}
