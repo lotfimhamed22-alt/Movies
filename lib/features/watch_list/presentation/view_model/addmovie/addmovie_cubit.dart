@@ -63,7 +63,22 @@ class AddmovieCubit extends Cubit<AddmovieState> {
       emit(AddmovieFailure(message: e.toString()));
     }
   }
-  // save bookMark in hive box
 
-  // delete movie
+  // save bookMark in hive box
+  void saveDataInHive({required int movieId, required bool isBookMark}) {
+    emit(AddmovieLoading());
+
+    try {
+      box.put(movieId, isBookMark);
+
+      emit(AddmovieSuccess());
+    } catch (e) {
+      emit(AddmovieFailure(message: e.toString()));
+    }
+  }
+
+  //
+  bool isBookMarked(int movieId) {
+    return box.get(movieId, defaultValue: false);
+  }
 }

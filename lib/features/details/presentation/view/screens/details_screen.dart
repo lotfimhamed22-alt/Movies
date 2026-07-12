@@ -31,6 +31,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     super.initState();
     context.read<ReviewCubit>().getReview(widget.data.id);
     context.read<CastCubit>().getCatData(widget.data.id);
+    context.read<AddmovieCubit>().isBookMarked(widget.data.id);
   }
 
   // bool isClick = true;
@@ -38,13 +39,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddmovieCubit, AddmovieState>(
-      listener: (context, state) {
-        if (state is AddmovieSuccess) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: CustomText(text: "Movie is Added")));
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar(
@@ -52,15 +47,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
               // 1. جلب الحالة الحالية للمتغير من الـ Cubit وعكسها مباشرة عند الضغط
               bool currentStatus = context.read<AddmovieCubit>().isBookMark;
               bool newStatus = !currentStatus;
-
               // 2. تحديث قيمة الـ Cubit بالوضع الجديد فوراً ليتحول شكل الأيقونة في الـ UI
               context.read<AddmovieCubit>().updateIsBookMark(newStatus);
 
+              print(widget.data.id);
               // 3. اتخاذ القرار بناءً على الوضع الجديد
               if (newStatus == false) {
                 // إذا أصبحت true، نقوم بإضافة الفيلم
                 print("تمت الإضافة للبوك مارك");
-
                 context.read<AddmovieCubit>().addMovie(
                   id: widget.data.id,
                   title: widget.data.title,
@@ -73,6 +67,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   popularity: widget.data.popularity,
                   genreIds: widget.data.genreIds,
                 );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: CustomText(text: "Movie is Added")),
+                );
+                //
+                final cubit = context.read<AddmovieCubit>();
+
+                final current = cubit.isBookMarked(widget.data.id);
+
+                cubit.saveDataInHive(
+                  movieId: widget.data.id,
+                  isBookMark: current,
+                );
+                //
               } else {
                 // إذا أصبحت false، (إختياري) يمكنك استدعاء ميثود حذف الفيلم هنا لو متوفرة
                 print("تم الحذف من البوك مارك");
