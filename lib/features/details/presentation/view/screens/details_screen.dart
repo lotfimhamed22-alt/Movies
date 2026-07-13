@@ -6,6 +6,8 @@ import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/responsive/extentions.dart';
+import 'package:movies/core/shared_pref/cach_helper.dart';
+import 'package:movies/core/shared_pref/service_locator.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_about_movie.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_cast.dart';
@@ -16,6 +18,7 @@ import 'package:movies/features/details/presentation/view_model/review/cubit/rev
 import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
 import 'package:movies/features/watch_list/presentation/view_model/addmovie/addmovie_cubit.dart';
+import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key, required this.data});
@@ -31,7 +34,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     super.initState();
     context.read<ReviewCubit>().getReview(widget.data.id);
     context.read<CastCubit>().getCatData(widget.data.id);
-    context.read<AddmovieCubit>().isBookMarked(widget.data.id);
+    context.read<AddmovieCubit>().loadBookMark(widget.data.id);
   }
 
   // bool isClick = true;
@@ -43,49 +46,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: CustomAppBar(
-            onTap: () {
-              // 1. جلب الحالة الحالية للمتغير من الـ Cubit وعكسها مباشرة عند الضغط
-              bool currentStatus = context.read<AddmovieCubit>().isBookMark;
-              bool newStatus = !currentStatus;
-              // 2. تحديث قيمة الـ Cubit بالوضع الجديد فوراً ليتحول شكل الأيقونة في الـ UI
-              context.read<AddmovieCubit>().updateIsBookMark(newStatus);
-
-              print(widget.data.id);
-              // 3. اتخاذ القرار بناءً على الوضع الجديد
-              if (newStatus == false) {
-                // إذا أصبحت true، نقوم بإضافة الفيلم
-                print("تمت الإضافة للبوك مارك");
-                context.read<AddmovieCubit>().addMovie(
-                  id: widget.data.id,
-                  title: widget.data.title,
-                  overview: widget.data.overview,
-                  posterPath: widget.data.posterPath,
-                  backdropPath: widget.data.backdropPath,
-                  releaseDate: widget.data.releaseDate,
-                  voteAverage: widget.data.voteAverage,
-                  voteCount: widget.data.voteCount,
-                  popularity: widget.data.popularity,
-                  genreIds: widget.data.genreIds,
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: CustomText(text: "Movie is Added")),
-                );
-                //
-                final cubit = context.read<AddmovieCubit>();
-
-                final current = cubit.isBookMarked(widget.data.id);
-
-                cubit.saveDataInHive(
-                  movieId: widget.data.id,
-                  isBookMark: current,
-                );
-                //
-              } else {
-                // إذا أصبحت false، (إختياري) يمكنك استدعاء ميثود حذف الفيلم هنا لو متوفرة
-                print("تم الحذف من البوك مارك");
-                // context.read<AddmovieCubit>().deleteMovie(widget.data.id);
-              }
-            },
+            onTap: () => _getBookMarkToAddMovie(context),
             text: AppConstants.details,
             icon:
                 true ==
@@ -209,5 +170,45 @@ class _DetailsScreenState extends State<DetailsScreen> {
         );
       },
     );
+  }
+
+  void _getBookMarkToAddMovie(BuildContext context) async {
+    // 1. جلب الحالة الحالية للمتغير من الـ Cubit وعكسها مباشرة عند الضغط
+    bool currentStatus = context.read<AddmovieCubit>().isBookMark;
+    bool newStatus = !currentStatus;
+    // 2. تحديث قيمة الـ Cubit بالوضع الجديد فوراً ليتحول شكل الأيقونة في الـ UI
+    context.read<AddmovieCubit>().updateIsBookMark(
+      isBookMark: newStatus,
+      movieId: widget.data.id,
+    );
+    print(widget.data.id);
+    // 3. اتخاذ القرار بناءً على الوضع الجديد
+    if (newStatus == false) {
+      // إذا أصبحت true، نقوم بإضافة الفيلم
+      print("تمت الإضافة للبوك مارك");
+      context.read<AddmovieCubit>().addMovie(
+        id: widget.data.id,
+        title: widget.data.title,
+        overview: widget.data.overview,
+        posterPath: widget.data.posterPath,
+        backdropPath: widget.data.backdropPath,
+        releaseDate: widget.data.releaseDate,
+        voteAverage: widget.data.voteAverage,
+        voteCount: widget.data.voteCount,
+        popularity: widget.data.popularity,
+        genreIds: widget.data.genreIds,
+      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: CustomText(text: "Movie is Added")));
+    } else {
+      // إذا أصبحت false، (إختياري) يمكنك استدعاء ميثود حذف الفيلم هنا لو متوفرة
+      print("تم الحذف من البوك مارك");
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: CustomText(text: "Movie is Removed")));
+
+      context.read<DeleteMovieCubit>().removeMovie(widget.data.id);
+    }
   }
 }

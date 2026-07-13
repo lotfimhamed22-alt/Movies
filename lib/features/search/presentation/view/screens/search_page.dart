@@ -128,7 +128,7 @@ class _SearchPageState extends State<SearchPage> {
                                   horizontal: 12.0,
                                 ),
                                 child: SizedBox(
-                                  width: 320.w,
+                                  width: 350.w,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:

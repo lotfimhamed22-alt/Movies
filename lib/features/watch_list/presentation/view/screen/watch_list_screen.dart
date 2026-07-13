@@ -10,6 +10,7 @@ import 'package:movies/core/responsive/extentions.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
 import 'package:movies/features/watch_list/data/model/movie_model_watchlist.dart';
+import 'package:movies/features/watch_list/presentation/view_model/addmovie/addmovie_cubit.dart';
 import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
 import 'package:movies/features/watch_list/presentation/view_model/get_movie/cubit/get_movie_cubit.dart';
 
@@ -55,7 +56,6 @@ class _WatchListScreenState extends State<WatchListScreen> {
                             right: 20,
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
                                 height: 160.h,
@@ -70,53 +70,58 @@ class _WatchListScreenState extends State<WatchListScreen> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0,
+                                  horizontal: 20.0,
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    CustomText(
-                                      text: state.movies[index].title,
-                                      color: AppColors.textPrimary,
-                                      fontSize: 22.sp,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Gap(20.h),
-                                    CustomRowDetailsMovieSearch(
-                                      text: state.movies[index].id.toString(),
-                                      icon: Icons.star_border,
-                                      iconColor: AppColors.warning,
-                                      textColor: AppColors.warning,
-                                    ),
-                                    Gap(5.h),
-                                    CustomRowDetailsMovieSearch(
-                                      text: state.movies[index].releaseDate,
-                                      icon: Icons.bookmark_outline,
-                                      iconColor: AppColors.textSecondary,
-                                      textColor: AppColors.textSecondary,
-                                    ),
-                                    Gap(5.h),
-                                    CustomRowDetailsMovieSearch(
-                                      text: state.movies[index].voteAverage
-                                          .toString(),
-                                      icon: Icons.local_movies,
-                                      iconColor: AppColors.textSecondary,
-                                      textColor: AppColors.textSecondary,
-                                    ),
-                                    Gap(5.h),
-                                    CustomRowDetailsMovieSearch(
-                                      text: state.movies[index].voteCount
-                                          .toString(),
-                                      icon: Icons.calendar_today,
-                                      iconColor: AppColors.textSecondary,
-                                      textColor: AppColors.textSecondary,
-                                    ),
-                                  ],
+                                child: SizedBox(
+                                  width: 235.w,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                        text: state.movies[index].title,
+                                        color: AppColors.textPrimary,
+                                        fontSize: 22.sp,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Gap(20.h),
+                                      CustomRowDetailsMovieSearch(
+                                        text: state.movies[index].id.toString(),
+                                        icon: Icons.star_border,
+                                        iconColor: AppColors.warning,
+                                        textColor: AppColors.warning,
+                                      ),
+                                      Gap(5.h),
+                                      CustomRowDetailsMovieSearch(
+                                        text: state.movies[index].releaseDate,
+                                        icon: Icons.bookmark_outline,
+                                        iconColor: AppColors.textSecondary,
+                                        textColor: AppColors.textSecondary,
+                                      ),
+                                      Gap(5.h),
+                                      CustomRowDetailsMovieSearch(
+                                        text: state.movies[index].voteAverage
+                                            .toString(),
+                                        icon: Icons.local_movies,
+                                        iconColor: AppColors.textSecondary,
+                                        textColor: AppColors.textSecondary,
+                                      ),
+                                      Gap(5.h),
+                                      CustomRowDetailsMovieSearch(
+                                        text: state.movies[index].voteCount
+                                            .toString(),
+                                        icon: Icons.calendar_today,
+                                        iconColor: AppColors.textSecondary,
+                                        textColor: AppColors.textSecondary,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
+
                               Spacer(),
-                              Row(children: [_getDeleteMovie(movie, index)]),
+                              _getDeleteMovie(movie, index),
                             ],
                           ),
                         );
@@ -162,19 +167,10 @@ class _WatchListScreenState extends State<WatchListScreen> {
     BuildContext context,
   ) {
     print(movie[index].id);
-    context.read<DeleteMovieCubit>().removeMovie(
-      MovieModelWatchlist(
-        id: movie[index].id,
-        title: movie[index].title,
-        overview: movie[index].overview,
-        posterPath: movie[index].posterPath,
-        backdropPath: movie[index].backdropPath,
-        releaseDate: movie[index].releaseDate,
-        voteAverage: movie[index].voteAverage,
-        voteCount: movie[index].voteCount,
-        popularity: movie[index].popularity,
-        genreIds: movie[index].genreIds,
-      ),
+    context.read<DeleteMovieCubit>().removeMovie(movie[index].id);
+    context.read<AddmovieCubit>().updateIsBookMark(
+      isBookMark: true,
+      movieId: movie[index].id,
     );
     context.read<GetMovieCubit>().getMoveToWatchList();
     ScaffoldMessenger.of(

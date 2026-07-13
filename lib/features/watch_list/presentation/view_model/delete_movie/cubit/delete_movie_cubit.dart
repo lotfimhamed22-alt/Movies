@@ -12,7 +12,7 @@ class DeleteMovieCubit extends Cubit<DeleteMovieState> {
   final Box box = Hive.box(HiveConstats.hiveBox);
 
   // remove movie
-  void removeMovie(MovieModelWatchlist movie) {
+  void removeMovie(int id) {
     emit(DeleteMovieLoading());
     try {
       List<MovieModelWatchlist> movieToDelete = List.from(
@@ -20,7 +20,7 @@ class DeleteMovieCubit extends Cubit<DeleteMovieState> {
       ).cast<MovieModelWatchlist>();
 
       // remove
-      movieToDelete.removeWhere((element) => element.id == movie.id); // put
+      movieToDelete.removeWhere((element) => element.id == id); // put
 
       box.put(HiveConstats.boxList, movieToDelete);
       emit(DeleteMovieSuccess());

@@ -16,6 +16,7 @@ import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/home/presentation/view/screens/home_page.dart';
 import 'package:movies/features/splash/splash_logic.dart';
 import 'package:movies/features/watch_list/presentation/view_model/addmovie/addmovie_cubit.dart';
+import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
 import 'package:movies/features/watch_list/presentation/view_model/get_movie/cubit/get_movie_cubit.dart';
 import 'package:movies/main_layout_screen.dart';
 
@@ -66,6 +67,7 @@ class AppRoutes {
               BlocProvider(create: (context) => CastCubit(CastRepo())),
               BlocProvider(create: (context) => AddmovieCubit()),
               BlocProvider(create: (context) => GetMovieCubit()),
+              BlocProvider(create: (context) => DeleteMovieCubit()),
             ],
             child: DetailsScreen(data: movie),
           );

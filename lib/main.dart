@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movies/core/constants/hive_constats.dart';
 import 'package:movies/core/routers/app_routes.dart';
+import 'package:movies/core/shared_pref/cach_helper.dart';
+import 'package:movies/core/shared_pref/service_locator.dart';
 import 'package:movies/core/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
@@ -14,6 +16,8 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MovieModelWatchlistAdapter());
   await Hive.openBox(HiveConstats.hiveBox);
+  setupLocator();
+  await getIt<CachHelper>().init();
   runApp(const MyApp());
 }
 
