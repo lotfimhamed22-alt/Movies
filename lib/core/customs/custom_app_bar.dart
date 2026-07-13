@@ -6,16 +6,23 @@ import 'package:movies/core/responsive/extentions.dart';
 import 'package:movies/core/theme/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.text, this.icon, this.onTap});
+  const CustomAppBar({
+    super.key,
+    required this.text,
+    this.icon,
+    this.onTap,
+    this.onTapPop,
+  });
   final String text;
   final IconData? icon;
   final void Function()? onTap;
+  final void Function()? onTapPop;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       leading: GestureDetector(
-        onTap: () => context.pop(),
+        onTap: onTapPop,
         child: Icon(Icons.arrow_back_ios),
       ),
       scrolledUnderElevation: 0,

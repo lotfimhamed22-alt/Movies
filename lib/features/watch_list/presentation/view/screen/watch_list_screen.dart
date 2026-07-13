@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/app_constants.dart';
 import 'package:movies/core/constants/asset_constants.dart';
+import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/responsive/extentions.dart';
 import 'package:movies/core/theme/app_colors.dart';
+import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
 import 'package:movies/features/watch_list/data/model/movie_model_watchlist.dart';
 import 'package:movies/features/watch_list/presentation/view_model/addmovie/addmovie_cubit.dart';
@@ -61,7 +64,26 @@ class _WatchListScreenState extends State<WatchListScreen> {
                                 height: 160.h,
                                 width: 125.w,
                                 child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () => context.push(
+                                    RoutesConstants.detailsPath,
+                                    extra: MovieModel(
+                                      id: state.movies[index].id,
+                                      title: state.movies[index].title,
+                                      overview: state.movies[index].overview,
+                                      posterPath:
+                                          state.movies[index].posterPath,
+                                      backdropPath:
+                                          state.movies[index].backdropPath,
+                                      releaseDate:
+                                          state.movies[index].releaseDate,
+                                      voteAverage:
+                                          state.movies[index].voteAverage,
+                                      voteCount: state.movies[index].voteCount,
+                                      popularity:
+                                          state.movies[index].popularity,
+                                      genreIds: state.movies[index].genreIds,
+                                    ),
+                                  ),
                                   child: CustomClipRrect(
                                     imgPath:
                                         'https://image.tmdb.org/t/p/w500${state.movies[index].posterPath}',

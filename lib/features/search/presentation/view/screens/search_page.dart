@@ -27,6 +27,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        onTapPop: () => context.pop(),
         text: AppConstants.search,
         icon: Icons.error_outline,
       ),
@@ -46,6 +47,7 @@ class _SearchPageState extends State<SearchPage> {
               readOnly: false,
               controller: _searchController,
             ),
+            Gap(20.h),
             // listview builder
             BlocBuilder<SearchCubit, SearchState>(
               builder: (context, state) {

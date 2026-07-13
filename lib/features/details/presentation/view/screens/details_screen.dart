@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/app_constants.dart';
 import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
@@ -17,6 +18,7 @@ import 'package:movies/features/details/presentation/view_model/cast/cubit/cast_
 import 'package:movies/features/details/presentation/view_model/review/cubit/review_cubit.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
+import 'package:movies/features/watch_list/data/model/movie_model_watchlist.dart';
 import 'package:movies/features/watch_list/presentation/view_model/addmovie/addmovie_cubit.dart';
 import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
 
@@ -37,8 +39,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
     context.read<AddmovieCubit>().loadBookMark(widget.data.id);
   }
 
-  // bool isClick = true;
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddmovieCubit, AddmovieState>(
@@ -47,6 +47,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         return Scaffold(
           appBar: CustomAppBar(
             onTap: () => _getBookMarkToAddMovie(context),
+            onTapPop: () => context.pop(),
             text: AppConstants.details,
             icon:
                 true ==
@@ -187,26 +188,32 @@ class _DetailsScreenState extends State<DetailsScreen> {
       // إذا أصبحت true، نقوم بإضافة الفيلم
       print("تمت الإضافة للبوك مارك");
       context.read<AddmovieCubit>().addMovie(
-        id: widget.data.id,
-        title: widget.data.title,
-        overview: widget.data.overview,
-        posterPath: widget.data.posterPath,
-        backdropPath: widget.data.backdropPath,
-        releaseDate: widget.data.releaseDate,
-        voteAverage: widget.data.voteAverage,
-        voteCount: widget.data.voteCount,
-        popularity: widget.data.popularity,
-        genreIds: widget.data.genreIds,
+        MovieModelWatchlist(
+          id: widget.data.id,
+          title: widget.data.title,
+          overview: widget.data.overview,
+          posterPath: widget.data.posterPath,
+          backdropPath: widget.data.backdropPath,
+          releaseDate: widget.data.releaseDate,
+          voteAverage: widget.data.voteAverage,
+          voteCount: widget.data.voteCount,
+          popularity: widget.data.popularity,
+          genreIds: widget.data.genreIds,
+        ),
       );
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: CustomText(text: "Movie is Added")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: CustomText(text: "Movie ${widget.data.title}  is Added"),
+        ),
+      );
     } else {
       // إذا أصبحت false، (إختياري) يمكنك استدعاء ميثود حذف الفيلم هنا لو متوفرة
       print("تم الحذف من البوك مارك");
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: CustomText(text: "Movie is Removed")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: CustomText(text: "Movie ${widget.data.title} is Removed"),
+        ),
+      );
 
       context.read<DeleteMovieCubit>().removeMovie(widget.data.id);
     }
