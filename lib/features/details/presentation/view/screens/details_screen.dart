@@ -8,6 +8,7 @@ import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/responsive/extentions.dart';
 import 'package:movies/core/theme/app_colors.dart';
+import 'package:movies/core/utils/snack.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_about_movie.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_cast.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_review.dart';
@@ -199,18 +200,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
           genreIds: widget.data.genreIds,
         ),
       );
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: CustomText(text: "Movie ${widget.data.title}  is Added"),
-        ),
+      Snack.snack(
+        context: context,
+        textColor: AppColors.textPrimary,
+        text: "Movie ${widget.data.title}  is Added",
       );
     } else {
       // إذا أصبحت false، (إختياري) يمكنك استدعاء ميثود حذف الفيلم هنا لو متوفرة
       print("تم الحذف من البوك مارك");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: CustomText(text: "Movie ${widget.data.title} is Removed"),
-        ),
+
+      Snack.snack(
+        context: context,
+        textColor: AppColors.textPrimary,
+        text: "Movie ${widget.data.title}  is Removed",
       );
 
       context.read<DeleteMovieCubit>().removeMovie(widget.data.id);
