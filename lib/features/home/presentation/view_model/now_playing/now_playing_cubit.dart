@@ -10,14 +10,17 @@ class NowPlayingCubit extends Cubit<NowPlayingState> {
   NowPlayingCubit(this.nowPlayingRepo) : super(NowPlayingInitial());
 
   Future<void> getNowPlayingMovies() async {
+    if (isClosed) return;
+
     emit(NowPlayingLoading());
     print("loading");
     try {
       print("success");
       var response = await nowPlayingRepo.getNowPlayingMovies();
-
+      if (isClosed) return;
       emit(NowPlayingSuccess(response: response));
     } catch (e) {
+      if (isClosed) return;
       emit(NowPlayingFailure(errorMessage: e.toString()));
       print("failure");
     }

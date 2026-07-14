@@ -6,7 +6,6 @@ import 'package:movies/core/shared_pref/cach_helper.dart';
 import 'package:movies/core/shared_pref/service_locator.dart';
 import 'package:movies/core/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:movies/features/home/data/models/movie_model.dart';
 import 'features/watch_list/data/model/movie_model_watchlist.dart';
 import 'firebase_options.dart';
 

@@ -9,12 +9,18 @@ class CastCubit extends Cubit<CastState> {
   final CastRepo castRepo;
   CastCubit(this.castRepo) : super(CastInitial());
   Future<void> getCatData(int movieId) async {
+    if (isClosed) return;
+
+    emit(CastLoading());
     try {
-      emit(CastLoading());
       var data = await castRepo.getCatData(movieId);
+      if (isClosed) return;
+
       emit(CastSuccess(response: data));
       print("success");
     } catch (e) {
+      if (isClosed) return;
+
       emit(CastFailure(errorMessage: e.toString()));
       print("fail");
     }

@@ -68,15 +68,9 @@ class _SearchPageState extends State<SearchPage> {
                     ],
                   );
                 }
-
                 if (state is SearchLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.textPrimary,
-                    ),
-                  );
+                  return _getSearchLoadig();
                 }
-
                 if (state is SearchSuccess) {
                   if (state.responseModel.results.isEmpty) {
                     return Column(
@@ -206,6 +200,12 @@ class _SearchPageState extends State<SearchPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Center _getSearchLoadig() {
+    return Center(
+      child: CircularProgressIndicator(color: AppColors.textPrimary),
     );
   }
 }

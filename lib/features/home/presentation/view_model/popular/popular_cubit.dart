@@ -9,11 +9,17 @@ class PopularCubit extends Cubit<PopularState> {
   final PopularRepo popularRepo;
   PopularCubit(this.popularRepo) : super(PopularInitial());
   Future<void> getPopularMovies() async {
+    if (isClosed) return;
+
     emit(PopularLoading());
     try {
       var response = await popularRepo.getPopularMovies();
+      if (isClosed) return;
+
       emit(PopularSuccess(responseModel: response));
     } catch (e) {
+      if (isClosed) return;
+
       emit(PopularFailure(errorMessage: e.toString()));
     }
   }

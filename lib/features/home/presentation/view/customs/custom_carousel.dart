@@ -17,32 +17,39 @@ class CustomCarousel extends StatelessWidget {
     return BlocBuilder<NowPlayingCubit, NowPlayingState>(
       builder: (context, state) {
         if (state is NowPlayingLoading) {
-          return Center(
-            child: CircularProgressIndicator(color: AppColors.textPrimary),
+          return SizedBox(
+            height: 250.h,
+
+            child: Center(
+              child: CircularProgressIndicator(color: AppColors.textPrimary),
+            ),
           );
         }
         if (state is NowPlayingSuccess) {
-          return CarouselSlider.builder(
-            itemCount: state.response.results.length,
-            options: CarouselOptions(
-              autoPlay: true,
-              viewportFraction: 0.47.w,
-              enlargeCenterPage: true,
-              autoPlayCurve: Curves.linear,
-              autoPlayAnimationDuration: Duration(seconds: 2),
+          return SizedBox(
+            height: 250.h,
+            child: CarouselSlider.builder(
+              itemCount: state.response.results.length,
+              options: CarouselOptions(
+                autoPlay: true,
+                viewportFraction: 0.47.w,
+                enlargeCenterPage: true,
+                autoPlayCurve: Curves.linear,
+                autoPlayAnimationDuration: Duration(seconds: 2),
+              ),
+              itemBuilder: (context, index, realIndex) {
+                return GestureDetector(
+                  onTap: () => context.push(
+                    RoutesConstants.detailsPath,
+                    extra: state.response.results[index],
+                  ),
+                  child: CustomClipRrect(
+                    imgPath:
+                        'https://image.tmdb.org/t/p/w500${state.response.results[index].posterPath}',
+                  ),
+                );
+              },
             ),
-            itemBuilder: (context, index, realIndex) {
-              return GestureDetector(
-                onTap: () => context.push(
-                  RoutesConstants.detailsPath,
-                  extra: state.response.results[index],
-                ),
-                child: CustomClipRrect(
-                  imgPath:
-                      'https://image.tmdb.org/t/p/w500${state.response.results[index].posterPath}',
-                ),
-              );
-            },
           );
         }
         return SizedBox(child: CustomText(text: "no data"));

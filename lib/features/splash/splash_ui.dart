@@ -15,7 +15,7 @@ class SplashUi extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(AssetConstants.logo, width: 189.w, height: 189.h),
+              Image.asset(AssetConstants.logo, width: 175.w, height: 175.h),
               CustomText(
                 text: "Welcome To Movies",
                 fontSize: 30.sp,

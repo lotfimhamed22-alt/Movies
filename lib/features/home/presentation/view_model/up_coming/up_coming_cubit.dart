@@ -9,11 +9,14 @@ class UpComingCubit extends Cubit<UpComingState> {
   final UpComingRepo upComingRepo;
   UpComingCubit(this.upComingRepo) : super(UpComingInitial());
   Future<void> getUpComingMovies() async {
+    if (isClosed) return;
     emit(UpComingLoading());
     try {
       var response = await upComingRepo.getUpComingMovies();
+      if (isClosed) return;
       emit(UpComingSuccess(responseModel: response));
     } catch (e) {
+      if (isClosed) return;
       emit(UpComingFailure(errorMessage: e.toString()));
     }
   }

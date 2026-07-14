@@ -7,8 +7,6 @@ import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/responsive/extentions.dart';
-import 'package:movies/core/shared_pref/cach_helper.dart';
-import 'package:movies/core/shared_pref/service_locator.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_about_movie.dart';
 import 'package:movies/features/details/presentation/view/customs/custom_cast.dart';

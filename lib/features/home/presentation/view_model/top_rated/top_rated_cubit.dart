@@ -9,14 +9,20 @@ class TopRatedCubit extends Cubit<TopRatedState> {
   final TopRatedRepo topRatedRepo;
   TopRatedCubit(this.topRatedRepo) : super(TopRatedInitial());
   Future<void> getTopRatedMovies() async {
+    if (isClosed) return;
+
     emit(TopRatedLoading());
 
     try {
       print("sucess top rated");
 
       var response = await topRatedRepo.getTopRatedMovies();
+      if (isClosed) return;
+
       emit(TopRatedSuccess(responseModel: response));
     } catch (e) {
+      if (isClosed) return;
+
       emit(TopRatedFailure(errorMessage: e.toString()));
       print("fail top rated");
     }
