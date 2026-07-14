@@ -1,9 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:movies/core/constants/app_constants.dart';
-import 'package:movies/core/constants/asset_constants.dart';
 import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
@@ -14,6 +15,7 @@ import 'package:movies/core/utils/snack.dart';
 import 'package:movies/features/home/data/models/movie_model.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
 import 'package:movies/features/watch_list/data/model/movie_model_watchlist.dart';
+import 'package:movies/features/watch_list/presentation/view/widgets/empty_watchlist_widget.dart';
 import 'package:movies/features/watch_list/presentation/view_model/addmovie/addmovie_cubit.dart';
 import 'package:movies/features/watch_list/presentation/view_model/delete_movie/cubit/delete_movie_cubit.dart';
 import 'package:movies/features/watch_list/presentation/view_model/get_movie/cubit/get_movie_cubit.dart';
@@ -49,7 +51,7 @@ class _WatchListScreenState extends State<WatchListScreen> {
                     return EmptyWatchListWidget();
                   }
                   return SizedBox(
-                    height: 750.h,
+                    height: 740.h,
                     child: ListView.builder(
                       itemCount: state.movies.length,
                       itemBuilder: (context, index) {
@@ -201,33 +203,6 @@ class _WatchListScreenState extends State<WatchListScreen> {
       context: context,
       textColor: AppColors.textPrimary,
       text: "Movie ${movie[index].title}  is Removed",
-    );
-  }
-}
-
-class EmptyWatchListWidget extends StatelessWidget {
-  const EmptyWatchListWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Image.asset(AssetConstants.emptyBox, width: 120.w),
-          Gap(20.h),
-          CustomText(
-            text: AppConstants.noMovieYet,
-            color: AppColors.textPrimary,
-            fontSize: 20.sp,
-          ),
-          Gap(20.h),
-          CustomText(
-            text: AppConstants.findYourMovie,
-            color: AppColors.textSecondary,
-            fontSize: 16.sp,
-          ),
-        ],
-      ),
     );
   }
 }

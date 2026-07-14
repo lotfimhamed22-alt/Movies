@@ -42,7 +42,7 @@ class _SignupPageState extends State<SignupPage> {
                     backgroundImage: AssetImage(AssetConstants.signupAsset),
                   ),
                 ),
-                Gap(90.h),
+                Gap(70.h),
                 Customtextformfield(
                   username: AppConstants.email,
                   validator: AppValidator.emailValidationStatus,

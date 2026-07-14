@@ -211,7 +211,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
       Snack.snack(
         context: context,
-        textColor: AppColors.textPrimary,
+        textColor: AppColors.error,
         text: "Movie ${widget.data.title}  is Removed",
       );
 

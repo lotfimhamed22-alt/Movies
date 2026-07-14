@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundImage: AssetImage(AssetConstants.loginAsset),
                   ),
                 ),
-                Gap(90.h),
+                Gap(70.h),
                 Customtextformfield(
                   username: AppConstants.email,
                   validator: AppValidator.emailValidationStatus,

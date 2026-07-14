@@ -102,9 +102,9 @@ class _SearchPageState extends State<SearchPage> {
                         itemCount: state.responseModel.results.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
+                            padding: const EdgeInsets.all(12.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              // mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 SizedBox(
                                   height: 160.h,
@@ -125,7 +125,7 @@ class _SearchPageState extends State<SearchPage> {
                                     horizontal: 12.0,
                                   ),
                                   child: SizedBox(
-                                    width: 350.w,
+                                    width: 250.w,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,

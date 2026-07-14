@@ -37,7 +37,7 @@ class Forgetpass extends StatelessWidget {
                     backgroundImage: AssetImage(AssetConstants.forgetAsset),
                   ),
                 ),
-                Gap(90.h),
+                Gap(70.h),
                 Customtextformfield(
                   username: AppConstants.email,
                   validator: AppValidator.emailValidationStatus,

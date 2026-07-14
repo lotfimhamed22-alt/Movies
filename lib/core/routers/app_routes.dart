@@ -22,7 +22,7 @@ import 'package:movies/main_layout_screen.dart';
 
 class AppRoutes {
   static final router = GoRouter(
-    initialLocation: RoutesConstants.bottomNavigationPath,
+    initialLocation: RoutesConstants.splash,
     routes: [
       GoRoute(
         path: RoutesConstants.splash,
