@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/features/home/presentation/view_model/top_rated/top_rated_cubit.dart';
 
 class CustomGridViewTopRated extends StatelessWidget {

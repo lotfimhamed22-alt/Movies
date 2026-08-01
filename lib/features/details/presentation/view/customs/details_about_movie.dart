@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
 

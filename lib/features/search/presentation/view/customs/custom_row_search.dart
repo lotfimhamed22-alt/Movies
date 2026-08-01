@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:movies/core/customs/custom_text.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomRowDetailsMovieSearch extends StatelessWidget {
   const CustomRowDetailsMovieSearch({

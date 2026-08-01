@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movies/core/constants/hive_constats.dart';
 import 'package:movies/core/routers/app_routes.dart';
@@ -26,10 +27,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: AppTheme.lightTheme,
-      routerConfig: AppRoutes.router,
-      debugShowCheckedModeBanner: false,
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) => MaterialApp.router(
+        theme: AppTheme.lightTheme,
+        routerConfig: AppRoutes.router,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

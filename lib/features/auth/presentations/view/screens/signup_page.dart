@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/app_constants.dart';
 import 'package:movies/core/constants/asset_constants.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/core/utils/snack.dart';
 import 'package:movies/core/validators/app_validator.dart';

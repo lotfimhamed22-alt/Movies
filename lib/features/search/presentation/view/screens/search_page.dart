@@ -9,7 +9,7 @@ import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/customs/custom_textfield.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/features/search/presentation/model_view/search/search_cubit.dart';
 import 'package:movies/features/search/presentation/view/customs/custom_row_search.dart';
@@ -97,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                     }
                     return SizedBox(
                       height: 713.h,
-                      width: double.infinity,
+                      width: 400.w,
                       child: ListView.builder(
                         itemCount: state.responseModel.results.length,
                         itemBuilder: (context, index) {

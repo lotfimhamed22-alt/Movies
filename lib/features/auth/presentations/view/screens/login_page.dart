@@ -6,7 +6,7 @@ import 'package:movies/core/constants/app_constants.dart';
 import 'package:movies/core/constants/asset_constants.dart';
 import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/core/customs/custom_text.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/core/utils/snack.dart';
 import 'package:movies/core/validators/app_validator.dart';

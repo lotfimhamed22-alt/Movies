@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:movies/core/constants/app_constants.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/customs/custom_textfield.dart';
-import 'package:movies/core/responsive/extentions.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/theme/app_colors.dart';
 import 'package:movies/features/home/presentation/view/customs/custom_carousel.dart';
 import 'package:movies/features/home/presentation/view/customs/custom_grid_view_playig.dart';
