@@ -6,4 +6,5 @@ class RoutesConstants {
   static const String homePath = "/home";
   static const String bottomNavigationPath = "/bottom";
   static const String detailsPath = "/details";
+  static const String watchListPath = "/watchList";
 }

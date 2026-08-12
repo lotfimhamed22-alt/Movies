@@ -46,7 +46,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
         return Scaffold(
           appBar: CustomAppBar(
             onTap: () => _getBookMarkToAddMovie(context),
-            onTapPop: () => context.pop(),
+            onTapPop: () {
+              context.pop(true);
+            },
             text: AppConstants.details,
             icon:
                 true ==
@@ -81,7 +83,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               'https://image.tmdb.org/t/p/w500${widget.data.backdropPath}',
                         ),
                       ),
-                      
+
                       Positioned(
                         bottom: 70.h,
                         right: 10.w,
@@ -215,7 +217,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
         text: "Movie ${widget.data.title}  is Removed",
       );
 
+      context.read<AddmovieCubit>().updateIsBookMark(
+        isBookMark: true,
+        movieId: widget.data.id,
+      );
       context.read<DeleteMovieCubit>().removeMovie(widget.data.id);
+
+      // context.read<GetMovieCubit>().getMoveToWatchList();
+      // context.pop(true);
     }
   }
 }

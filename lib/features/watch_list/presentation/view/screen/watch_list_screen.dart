@@ -32,6 +32,7 @@ class _WatchListScreenState extends State<WatchListScreen> {
   @override
   void initState() {
     context.read<GetMovieCubit>().getMoveToWatchList();
+
     super.initState();
   }
 
@@ -51,6 +52,7 @@ class _WatchListScreenState extends State<WatchListScreen> {
                   if (state.movies.isEmpty) {
                     return EmptyWatchListWidget();
                   }
+
                   return SizedBox(
                     height: AppSized.height * 0.75,
                     child: ListView.builder(
@@ -68,26 +70,34 @@ class _WatchListScreenState extends State<WatchListScreen> {
                                 height: 140.h,
                                 width: 105.w,
                                 child: GestureDetector(
-                                  onTap: () => context.push(
-                                    RoutesConstants.detailsPath,
-                                    extra: MovieModel(
-                                      id: state.movies[index].id,
-                                      title: state.movies[index].title,
-                                      overview: state.movies[index].overview,
-                                      posterPath:
-                                          state.movies[index].posterPath,
-                                      backdropPath:
-                                          state.movies[index].backdropPath,
-                                      releaseDate:
-                                          state.movies[index].releaseDate,
-                                      voteAverage:
-                                          state.movies[index].voteAverage,
-                                      voteCount: state.movies[index].voteCount,
-                                      popularity:
-                                          state.movies[index].popularity,
-                                      genreIds: state.movies[index].genreIds,
-                                    ),
-                                  ),
+                                  onTap: () async {
+                                    final result = await context.push(
+                                      RoutesConstants.detailsPath,
+                                      extra: MovieModel(
+                                        id: state.movies[index].id,
+                                        title: state.movies[index].title,
+                                        overview: state.movies[index].overview,
+                                        posterPath:
+                                            state.movies[index].posterPath,
+                                        backdropPath:
+                                            state.movies[index].backdropPath,
+                                        releaseDate:
+                                            state.movies[index].releaseDate,
+                                        voteAverage:
+                                            state.movies[index].voteAverage,
+                                        voteCount:
+                                            state.movies[index].voteCount,
+                                        popularity:
+                                            state.movies[index].popularity,
+                                        genreIds: state.movies[index].genreIds,
+                                      ),
+                                    );
+                                    if (result == true && mounted) {
+                                      context
+                                          .read<GetMovieCubit>()
+                                          .getMoveToWatchList();
+                                    }
+                                  },
                                   child: CustomClipRrect(
                                     imgPath:
                                         'https://image.tmdb.org/t/p/w500${state.movies[index].posterPath}',

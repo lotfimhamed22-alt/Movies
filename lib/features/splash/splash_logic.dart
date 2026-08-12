@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/routes_constants.dart';
+import 'package:movies/core/services/auth_services.dart';
 import 'package:movies/features/splash/splash_ui.dart';
 
 class SplashLogic extends StatefulWidget {
@@ -13,25 +14,26 @@ class SplashLogic extends StatefulWidget {
 class _SplashLogicState extends State<SplashLogic> {
   @override
   void initState() {
-    navigateToSplash();
     super.initState();
+    navigateToNextScreen();
   }
 
-  // navigate to splash
-  Future<void> navigateToSplash() async {
-    await Future.delayed(Duration(seconds: 5));
+  Future<void> navigateToNextScreen() async {
+    await Future.delayed(const Duration(seconds: 2));
+
     if (!mounted) return;
-    context.push(RoutesConstants.loginPath);
-  }
 
-  @override
-  void dispose() {
-    navigateToSplash();
-    super.dispose();
+    final user = authServices.value.currentUser;
+
+    if (user != null) {
+      context.go(RoutesConstants.bottomNavigationPath);
+    } else {
+      context.go(RoutesConstants.loginPath);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return SplashUi();
+    return const SplashUi();
   }
 }

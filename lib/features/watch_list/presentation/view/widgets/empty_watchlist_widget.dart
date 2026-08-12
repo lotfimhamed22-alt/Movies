@@ -15,13 +15,13 @@ class EmptyWatchListWidget extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(AssetConstants.emptyBox, width: 120.w),
-          Gap(20.h),
+          Gap(10.h),
           CustomText(
             text: AppConstants.noMovieYet,
             color: AppColors.textPrimary,
             fontSize: 20.sp,
           ),
-          Gap(20.h),
+          Gap(10.h),
           CustomText(
             text: AppConstants.findYourMovie,
             color: AppColors.textSecondary,
