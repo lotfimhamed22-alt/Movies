@@ -18,7 +18,7 @@ class CustomCarousel extends StatelessWidget {
       builder: (context, state) {
         if (state is NowPlayingLoading) {
           return SizedBox(
-            height: 250.h,
+            height: 200.h,
 
             child: Center(
               child: CircularProgressIndicator(color: AppColors.textPrimary),
@@ -27,12 +27,12 @@ class CustomCarousel extends StatelessWidget {
         }
         if (state is NowPlayingSuccess) {
           return SizedBox(
-            height: 250.h,
+            height: 220.h,
             child: CarouselSlider.builder(
               itemCount: state.response.results.length,
               options: CarouselOptions(
                 autoPlay: true,
-                viewportFraction: 0.47.w,
+                viewportFraction: 0.4.w,
                 enlargeCenterPage: true,
                 autoPlayCurve: Curves.linear,
                 autoPlayAnimationDuration: Duration(seconds: 2),

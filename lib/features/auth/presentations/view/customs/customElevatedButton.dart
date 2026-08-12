@@ -20,7 +20,7 @@ class Customelevatedbutton extends StatelessWidget {
 
       child: CustomText(
         text: text,
-        fontSize: 25.sp,
+        fontSize: 22.sp,
         fontWeight: FontWeight.bold,
         color: AppColors.textPrimary,
       ),
@@ -28,10 +28,10 @@ class Customelevatedbutton extends StatelessWidget {
         backgroundColor: AppColors.myBlue,
         // foregroundColor: AppColors.myBlue,
         // disabledBackgroundColor: AppColors.myBlue,
-        fixedSize: Size(width.w, 70.h),
+        fixedSize: Size(width.w, 60.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(22.r),
-          side: BorderSide(width: 2, color: AppColors.success),
+          side: BorderSide(width: 2.w, color: AppColors.success),
         ),
       ),
     );

@@ -38,7 +38,7 @@ class CustomReview extends StatelessWidget {
                             imgPath:
                                 'https://image.tmdb.org/t/p/w500${state.reviewsModel.results[index].authorDetails.avatarPath}',
                           ),
-                          Gap(15.h),
+                          Gap(10.h),
                           CustomText(
                             text: state
                                 .reviewsModel
@@ -47,14 +47,14 @@ class CustomReview extends StatelessWidget {
                                 .rating
                                 .toString(),
                             color: AppColors.myBlue,
-                            fontSize: 15.sp,
+                            fontSize: 12.sp,
                           ),
                         ],
                       ),
-                      Gap(20.w),
+                      Gap(10.w),
                       SizedBox(
-                        height: 140.h,
-                        width: 350.w,
+                        height: 95.h,
+                        width: 230.w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -62,17 +62,17 @@ class CustomReview extends StatelessWidget {
                             CustomText(
                               text: state.reviewsModel.results[index].author
                                   .toString(),
-                              fontSize: 24.sp,
+                              fontSize: 18.sp,
                               overflow: TextOverflow.ellipsis,
                               color: AppColors.textPrimary,
                             ),
-                            Gap(10.h),
+                            Gap(5.h),
                             CustomText(
                               text: state.reviewsModel.results[index].content,
                               // overflow: TextOverflow.ellipsis,
-                              fontSize: 18.sp,
+                              fontSize: 10.sp,
                               color: AppColors.textPrimary,
-                              maxLines: 4,
+                              maxLines: 5,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],

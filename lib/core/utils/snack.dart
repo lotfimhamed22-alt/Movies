@@ -18,7 +18,7 @@ class Snack {
           child: CustomText(
             text: text,
             color: textColor,
-            fontSize: 25.sp,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w800,
           ),
         ),

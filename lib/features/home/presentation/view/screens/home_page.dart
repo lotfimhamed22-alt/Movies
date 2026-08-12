@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:movies/core/constants/app_constants.dart';
+import 'package:movies/core/constants/app_sized.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:movies/core/customs/custom_textfield.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,22 +40,20 @@ class _HomePageState extends State<HomePage> {
       body: DefaultTabController(
         length: 4,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: EdgeInsets.symmetric(horizontal: AppSized.width * 0.04),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(65.h),
+              Gap(30.h),
               CustomText(
                 text: AppConstants.homeTitle,
-                fontSize: 24.sp,
+                fontSize: 20.sp,
                 color: AppColors.textPrimary,
                 fontWeight: FontWeight.w500,
               ),
-              Gap(20.h),
+              Gap(15.h),
               CustomTextfield(readOnly: true),
-              Gap(30.h),
               CustomCarousel(),
-              Gap(20.h),
               TabBar(
                 labelColor: AppColors.textPrimary,
                 unselectedLabelColor: AppColors.myBlue,
@@ -65,14 +64,14 @@ class _HomePageState extends State<HomePage> {
                   Tab(
                     child: CustomText(
                       text: AppConstants.nowPlaying,
-                      fontSize: 16.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Tab(
                     child: CustomText(
                       text: AppConstants.upComing,
-                      fontSize: 16.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -80,14 +79,14 @@ class _HomePageState extends State<HomePage> {
                   Tab(
                     child: CustomText(
                       text: AppConstants.topRated,
-                      fontSize: 16.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Tab(
                     child: CustomText(
                       text: AppConstants.popular,
-                      fontSize: 16.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

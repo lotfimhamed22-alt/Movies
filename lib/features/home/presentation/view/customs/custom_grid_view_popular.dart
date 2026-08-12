@@ -22,9 +22,9 @@ class CustomGridViewPopular extends StatelessWidget {
             itemCount: state.responseModel.results.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              crossAxisSpacing: 25.w,
-              mainAxisSpacing: 20.h,
-              childAspectRatio: 1 / 1.6,
+              crossAxisSpacing: 20.w,
+              mainAxisSpacing: 15.h,
+              childAspectRatio: 1.3 / 2,
             ),
             itemBuilder: (context, index) {
               return GestureDetector(

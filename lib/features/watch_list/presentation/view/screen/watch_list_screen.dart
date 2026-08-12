@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:movies/core/constants/app_constants.dart';
+import 'package:movies/core/constants/app_sized.dart';
 import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/core/customs/custom_app_bar.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
@@ -39,7 +40,7 @@ class _WatchListScreenState extends State<WatchListScreen> {
     return Scaffold(
       appBar: CustomAppBar(text: AppConstants.watchList),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(horizontal: AppSized.width * 0.03),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -51,7 +52,7 @@ class _WatchListScreenState extends State<WatchListScreen> {
                     return EmptyWatchListWidget();
                   }
                   return SizedBox(
-                    height: 740.h,
+                    height: AppSized.height * 0.75,
                     child: ListView.builder(
                       itemCount: state.movies.length,
                       itemBuilder: (context, index) {
@@ -64,8 +65,8 @@ class _WatchListScreenState extends State<WatchListScreen> {
                           child: Row(
                             children: [
                               SizedBox(
-                                height: 160.h,
-                                width: 125.w,
+                                height: 140.h,
+                                width: 105.w,
                                 child: GestureDetector(
                                   onTap: () => context.push(
                                     RoutesConstants.detailsPath,
@@ -94,11 +95,11 @@ class _WatchListScreenState extends State<WatchListScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: AppSized.width * 0.02,
                                 ),
                                 child: SizedBox(
-                                  width: 235.w,
+                                  width: AppSized.width * 0.35,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -107,10 +108,10 @@ class _WatchListScreenState extends State<WatchListScreen> {
                                       CustomText(
                                         text: state.movies[index].title,
                                         color: AppColors.textPrimary,
-                                        fontSize: 22.sp,
+                                        fontSize: 16.sp,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      Gap(20.h),
+                                      Gap(12.h),
                                       CustomRowDetailsMovieSearch(
                                         text: state.movies[index].id.toString(),
                                         icon: Icons.star_border,
@@ -180,7 +181,7 @@ class _WatchListScreenState extends State<WatchListScreen> {
           onTap: () {
             _deleteMovieFromWatchList(movie, index, context);
           },
-          child: Icon(Icons.delete, size: 45.w, color: AppColors.error),
+          child: Icon(Icons.delete, size: 40.w, color: AppColors.error),
         );
       },
     );

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/app_constants.dart';
+import 'package:movies/core/constants/app_sized.dart';
 import 'package:movies/core/constants/asset_constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/core/theme/app_colors.dart';
@@ -31,69 +32,71 @@ class _SignupPageState extends State<SignupPage> {
         body: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
-              children: [
-                Gap(150.h),
-                SizedBox(
-                  width: 220.w,
-                  height: 220.h,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(AssetConstants.signupAsset),
+            padding: EdgeInsets.symmetric(horizontal: AppSized.width * 0.09),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Gap(80.h),
+                  SizedBox(
+                    width: 220.w,
+                    height: 220.h,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage(AssetConstants.signupAsset),
+                    ),
                   ),
-                ),
-                Gap(70.h),
-                Customtextformfield(
-                  username: AppConstants.email,
-                  validator: AppValidator.emailValidationStatus,
-                  controller: _emailController,
-                ),
-                Gap(20.h),
-                Customtextformfield(
-                  username: AppConstants.password,
-                  validator: AppValidator.PasswordValidationStatus,
-                  controller: _passwordController,
-                ),
-                Gap(50.h),
-                BlocConsumer<SignupCubit, SignupState>(
-                  listener: (context, state) {
-                    if (state is SignupSuccess) {
-                      Snack.snack(
-                        context: context,
-                        textColor: AppColors.textPrimary,
-                        text: AppConstants.authSuscess,
-                      );
-                      context.pop();
-                    }
-                    if (state is SignupFailure) {
-                      Snack.snack(
-                        context: context,
-                        textColor: AppColors.error,
-                        text: AppConstants.authFailure,
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return state is SignupLoading
-                        ? Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.myBlue,
-                            ),
-                          )
-                        : Customelevatedbutton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<SignupCubit>().signup(
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                );
-                              }
-                            },
-                            text: AppConstants.signup,
-                          );
-                  },
-                ),
-              ],
+                  Gap(40.h),
+                  Customtextformfield(
+                    username: AppConstants.email,
+                    validator: AppValidator.emailValidationStatus,
+                    controller: _emailController,
+                  ),
+                  Gap(20.h),
+                  Customtextformfield(
+                    username: AppConstants.password,
+                    validator: AppValidator.PasswordValidationStatus,
+                    controller: _passwordController,
+                  ),
+                  Gap(30.h),
+                  BlocConsumer<SignupCubit, SignupState>(
+                    listener: (context, state) {
+                      if (state is SignupSuccess) {
+                        Snack.snack(
+                          context: context,
+                          textColor: AppColors.textPrimary,
+                          text: AppConstants.authSuscess,
+                        );
+                        context.pop();
+                      }
+                      if (state is SignupFailure) {
+                        Snack.snack(
+                          context: context,
+                          textColor: AppColors.error,
+                          text: AppConstants.authFailure,
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      return state is SignupLoading
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.myBlue,
+                              ),
+                            )
+                          : Customelevatedbutton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.read<SignupCubit>().signup(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  );
+                                }
+                              },
+                              text: AppConstants.signup,
+                            );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

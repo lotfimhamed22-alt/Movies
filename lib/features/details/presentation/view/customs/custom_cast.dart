@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:movies/core/constants/app_sized.dart';
 import 'package:movies/core/customs/custom_clip_rrect.dart';
 import 'package:movies/core/customs/custom_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,32 +20,31 @@ class CustomCast extends StatelessWidget {
             itemCount: state.response.cast.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 20.w,
-              mainAxisSpacing: 5.h,
-              childAspectRatio: 1.w / 0.95.h,
+              crossAxisSpacing: 5.w,
+              childAspectRatio: 0.1.w / 0.1.h,
             ),
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
-                  horizontal: 8,
+                padding: EdgeInsets.symmetric(
+                  vertical: AppSized.height * 0.01,
+                  horizontal: AppSized.width * 0.01,
                 ),
                 child: Column(
                   children: [
                     CustomClipRrect(
-                      width: 140.w,
-                      height: 124.h,
-                      radius: 70,
-                      widthImage: 140.w,
-                      heightImage: 124.h,
+                      width: 90.w,
+                      height: 80.h,
+                      radius: 70.r,
+                      // widthImage: 20.w,
+                      // heightImage: 124.h,
                       imgPath:
                           'https://image.tmdb.org/t/p/w500${state.response.cast[index].profilePath}',
                     ),
-                    Gap(20.h),
+                    Gap(10.h),
                     CustomText(
                       text: state.response.cast[index].name,
                       color: AppColors.textPrimary,
-                      fontSize: 20.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w900,
                       overflow: TextOverflow.ellipsis,
                     ),

@@ -61,12 +61,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 400.h,
+                  height: 280.h,
                   width: double.infinity,
                   child: Stack(
                     children: [
                       CustomClipRrect(
-                        height: 300.h,
+                        height: 220.h,
                         width: double.infinity,
                         imgPath:
                             'https://image.tmdb.org/t/p/w500${widget.data.posterPath}',
@@ -75,16 +75,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         bottom: 0.h,
                         left: 20.w,
                         child: CustomClipRrect(
-                          width: 150.w,
-                          height: 210.h,
+                          width: 120.w,
+                          height: 170.h,
                           imgPath:
                               'https://image.tmdb.org/t/p/w500${widget.data.backdropPath}',
                         ),
                       ),
+                      
                       Positioned(
-                        bottom: 120.h,
+                        bottom: 70.h,
                         right: 10.w,
-                        // bottom: 30,
                         child: Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.all(5),
@@ -101,27 +101,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ),
                       Positioned(
-                        bottom: 40.h,
-                        left: 185.w,
+                        bottom: 30.h,
+                        right: 10.w,
                         child: CustomText(
                           text: widget.data.title,
                           color: AppColors.textPrimary,
-                          fontSize: 22.sp,
+                          fontSize: 13.sp,
                           fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
                 ),
                 // row
-                Gap(15.h),
+                Gap(8.h),
                 DetailsAboutMovie(
                   text1: widget.data.voteAverage.toString(),
                   text2: widget.data.voteCount.toString(),
                   text3: widget.data.popularity.toString(),
                   text4: widget.data.releaseDate,
                 ),
-                Gap(5.h),
                 // tab bar
                 TabBar(
                   labelColor: AppColors.textPrimary,
@@ -133,14 +133,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     Tab(
                       child: CustomText(
                         text: AppConstants.aboutMovie,
-                        fontSize: 16.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Tab(
                       child: CustomText(
                         text: AppConstants.reviews,
-                        fontSize: 16.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -148,7 +148,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     Tab(
                       child: CustomText(
                         text: AppConstants.cast,
-                        fontSize: 16.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

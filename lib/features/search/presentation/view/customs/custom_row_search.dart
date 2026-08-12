@@ -20,9 +20,9 @@ class CustomRowDetailsMovieSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, color: iconColor, size: 25.w),
-        Gap(5.w),
-        CustomText(text: text, color: textColor, fontSize: 16.sp),
+        Icon(icon, color: iconColor, size: 20.w),
+        Gap(3.w),
+        CustomText(text: text, color: textColor, fontSize: 12.sp),
       ],
     );
   }

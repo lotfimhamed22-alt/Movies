@@ -13,7 +13,7 @@ class CustomAboutMovie extends StatelessWidget {
       child: CustomText(
         text: text,
         color: AppColors.textPrimary,
-        fontSize: 20.sp,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w300,
       ),
     );

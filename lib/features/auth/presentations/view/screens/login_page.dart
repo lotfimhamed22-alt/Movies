@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movies/core/constants/app_constants.dart';
+import 'package:movies/core/constants/app_sized.dart';
 import 'package:movies/core/constants/asset_constants.dart';
 import 'package:movies/core/constants/routes_constants.dart';
 import 'package:movies/core/customs/custom_text.dart';
@@ -34,10 +35,10 @@ class _LoginPageState extends State<LoginPage> {
         body: Form(
           key: _formKey,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Column(
+            padding: EdgeInsets.symmetric(horizontal: AppSized.width * 0.09),
+            child: ListView(
               children: [
-                Gap(150.h),
+                Gap(80.h),
                 SizedBox(
                   width: 220.w,
                   height: 220.h,
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundImage: AssetImage(AssetConstants.loginAsset),
                   ),
                 ),
-                Gap(70.h),
+                Gap(40.h),
                 Customtextformfield(
                   username: AppConstants.email,
                   validator: AppValidator.emailValidationStatus,
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _passwordController,
                 ),
 
-                Gap(50.h),
+                Gap(20.h),
                 BlocConsumer<SigninCubit, SigninState>(
                   listener: (context, state) {
                     if (state is SigninSuccess) {
@@ -97,13 +98,13 @@ class _LoginPageState extends State<LoginPage> {
                           );
                   },
                 ),
-                Gap(50.h),
+                Gap(20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
                       text: AppConstants.suggest,
-                      fontSize: 20.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w300,
                       color: AppColors.textSecondary,
                     ),
@@ -111,20 +112,20 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () => context.push(RoutesConstants.signupPath),
                       child: CustomText(
                         text: AppConstants.click,
-                        fontSize: 18.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         color: AppColors.myBlue,
                       ),
                     ),
                   ],
                 ),
-                Gap(10.h),
+                Gap(5.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomText(
                       text: AppConstants.forgetPassword,
-                      fontSize: 20.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w300,
                       color: AppColors.textSecondary,
                     ),
@@ -134,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                           context.push(RoutesConstants.forgetPasswordPath),
                       child: CustomText(
                         text: AppConstants.click,
-                        fontSize: 18.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         color: AppColors.myBlue,
                       ),

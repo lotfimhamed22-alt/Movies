@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:movies/core/constants/app_sized.dart';
 import 'package:movies/core/constants/hive_constats.dart';
 import 'package:movies/core/routers/app_routes.dart';
 import 'package:movies/core/shared_pref/cach_helper.dart';
@@ -35,6 +36,10 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         routerConfig: AppRoutes.router,
         debugShowCheckedModeBanner: false,
+        builder: (context, child) {
+          AppSized.init(context);
+          return child!;
+        },
       ),
     );
   }
